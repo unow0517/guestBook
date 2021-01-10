@@ -8,7 +8,6 @@
   define('DB_NAME', "MbudmRIygc");
   define('PASSWORD', "GS60cOirnV");
 
-  $conn = mysqli_connect(SERVER, USERNAME, PASSWORD) or die(mysqli_error());
+  $conn = mysqli_connect(SERVER, USERNAME, PASSWORD, DB_NAME) or die(mysqli_error());
 
-  $db_select = mysqli_select_db($conn, DB_NAME) or die(mysqli_error());
 ?>

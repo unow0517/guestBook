@@ -5,21 +5,26 @@
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-
+  <!-- submit form -->
   <form action="" method="POST">
     <h1>Guest Page for YunHo's Portfolio Website</h1>
-    <input type="text" name='title' placeholder='write your title'><br><br>
-    <textarea name="message" placeholder ="write your message" cols="22" rows="10"></textarea><br><br>
+    <input required type="text" name='title' placeholder='write your title'><br><br>
+    <textarea required name="message" placeholder ="write your message" cols="22" rows="10"></textarea><br><br>
     <input type="submit" name='submit' value="Send Message to YunHo"/>
   </form>
+  <!-- submit form End-->
+
 
   <?php
+    //result message start
     if(isset($_SESSION['result'])){
       echo $_SESSION['result'];
       unset($_SESSION['result']);
     };
+    //result message end
   ?>
 
+    <!-- Read the messages from database -->
   <table class = 'table'>
     <tr>
         <th>id</th>
@@ -27,7 +32,7 @@
     </tr>
 
     <?php 
-      $sql = "SELECT * FROM Messages";
+      $sql = "SELECT * FROM Messages ORDER BY _date DESC";
       $res = mysqli_query($conn, $sql);
       
       //Serial Number shown
@@ -55,14 +60,18 @@
       ?>
     </tr>
   </table>
+  <!-- Read the messages from database End-->
 </body>
 
 
 <?php
+  // add submitted form to database
   if(isset($_POST['submit'])){
     //echo 'hello';
-    $title = $_POST['title'];
-    $message = $_POST['message'];
+    //escape single quote, double quote with real_escape_string
+    $title = mysqli_real_escape_string($conn, $_POST['title']) ;
+    $message =  mysqli_real_escape_string($conn, $_POST['message']);
+
 
     $sql = "INSERT INTO Messages SET  
       title = '$title',
@@ -77,7 +86,7 @@
     } else {
       $_SESSION['result'] = "There is Error";
       header('location: ./index.php');    
-    }
-
-  }
+    };
+  };
+  // add submitted form to database
 ?>
