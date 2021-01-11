@@ -2,15 +2,20 @@
 
 <!DOCTYPE html>
 <head>
+<title>Show your opinion to YunHo</title>
 <link rel="stylesheet" href="./style.css">
+<!-- google font -->
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- submit form -->
   <form action="" method="POST">
-    <h1>Guest Page for YunHo's Portfolio Website</h1>
-    <input required type="text" name='title' placeholder='write your title'><br><br>
-    <textarea required name="message" placeholder ="write your message" cols="22" rows="10"></textarea><br><br>
-    <input type="submit" name='submit' value="Send Message to YunHo"/>
+    <h1 class ="maintitle" >Guest Page for YunHo's Portfolio Website</h1>
+    <p>Title is shown to everyone, message can be checked only by YunHo</p>
+    <input class="title" required type="text" name='title' rows='2' placeholder='write your title'><br><br>
+    <textarea class="textarea" required name="message" placeholder ="write your message" cols="22" rows="10"></textarea><br>
+    <p>If you Submit, you neither take it back nor delete it!</p>
+    <input class="button" type="submit" name='submit' value="Send Message to YunHo"/>
   </form>
   <!-- submit form End-->
 
@@ -27,8 +32,8 @@
     <!-- Read the messages from database -->
   <table class = 'table'>
     <tr>
-        <th>id</th>
-        <th>title</th>
+        <th class="idtitle"><b>id</b></th>
+        <th><b>title</b></th>
     </tr>
 
     <?php 
@@ -81,10 +86,10 @@
     $res = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
     if($res){
-      $_SESSION['result'] = "Message Sent Successfully";
+      $_SESSION['result'] = "<div class='success'>Message Sent Successfully</div>";
       header('location: ./index.php');
     } else {
-      $_SESSION['result'] = "There is Error";
+      $_SESSION['result'] = "<div class='error'>There is Error</div>";
       header('location: ./index.php');    
     };
   };
